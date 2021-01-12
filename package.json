@@ -83,7 +83,8 @@
     "dev": "cross-env PORT=2333 node scripts/start.js",
     "build": "cross-env GENERATE_SOURCEMAP=false node scripts/build.js",
     "start": "node scripts/start.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "lint": "eslint ./src --ext .tsx,.ts --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -163,8 +164,11 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
     "cross-env": "^7.0.3",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "less": "^4.0.0",
-    "less-loader": "^7.2.1"
+    "less-loader": "^7.2.1",
+    "prettier": "^2.2.1"
   },
   "homepage": "."
 }

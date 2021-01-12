@@ -20,5 +20,5 @@ export const useStores = () => {
   if (!store) {
     throw new Error('no store')
   }
-  return store!
+  return store
 }

@@ -62,8 +62,9 @@ const axiosInstance = axios.create({
 })
 
 // 请求拦截
-axiosInstance.interceptors.request.use((config = {}) => {
-  let { baseURL = '', url = '', headers = {}, useLoading = true } = config as ICustomRequestConfig
+axiosInstance.interceptors.request.use((config: ICustomRequestConfig = {}) => {
+  let { baseURL = '', url = '', headers = {}, useLoading = true } = config
+
   if (useLoading) requestListener.add()
 
   const token = getToken()
@@ -76,8 +77,8 @@ axiosInstance.interceptors.request.use((config = {}) => {
 
 // 响应拦截
 axiosInstance.interceptors.response.use(
-  (response) => {
-    const { useLoading } = response.config as ICustomRequestConfig
+  (response: { data: any; config: ICustomRequestConfig }) => {
+    const { useLoading } = response.config
     if (useLoading) requestListener.sub()
 
     switch (response.data.code) {
@@ -87,8 +88,8 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(response.data)
     }
   },
-  (err = {}) => {
-    const { useLoading } = err.config as ICustomRequestConfig
+  (err: { config: ICustomRequestConfig }) => {
+    const { useLoading } = err.config
     if (useLoading) requestListener.sub()
 
     return Promise.reject(err)
